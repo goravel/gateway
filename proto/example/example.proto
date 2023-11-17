@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package example;
+
+// Change this to the path where your proto is located
+option go_package="github.com/goravel/gateway/proto/example";
+
+// If you want to know more about the google.api.http option, please refer to:
+// https://grpc-ecosystem.github.io/grpc-gateway/docs/tutorials/adding_annotations/
+import "google/api/annotations.proto";
+
+service UserService {
+  rpc GetUser (GetUserRequest) returns (GetUserResponse) {
+    option (google.api.http) = {
+      get: "/users/{id}"
+    };
+  }
+  rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {
+    option (google.api.http) = {
+      post: "/users"
+      body: "*"
+    };
+  }
+}
+
+message Status {
+  int32 code = 1;
+  string error = 2;
+}
+
+message User {
+  int64 id = 1;
+  string name = 2;
+}
+
+message GetUserRequest {
+  int64 id = 1;
+}
+
+message GetUserResponse {
+  Status status = 1;
+  User user = 2;
+}
+
+message CreateUserRequest {
+  string name = 2;
+}
+
+message CreateUserResponse {
+  Status status = 1;
+  User user = 2;
+}
