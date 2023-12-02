@@ -18,7 +18,9 @@ Gin http driver for Goravel.
 
 ## Install
 
-1. Install Grpc Gateway plugin to your system
+1. Install protoc based on your system
+
+2. Install Grpc Gateway plugin to your system
 
 ```
 go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
@@ -26,13 +28,13 @@ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@v2
 ```
 
-2. Add package
+3. Add package
 
 ```
 go get -u github.com/goravel/gateway
 ```
 
-3. Register service provider
+4. Register service provider
 
 ```
 // config/app.go
@@ -44,7 +46,7 @@ import "github.com/goravel/gateway"
 }
 ```
 
-4. Publish config and proto files
+5. Publish config and proto files
 
 ```
 go run . artisan vendor:publish --package=github.com/goravel/gateway
@@ -52,11 +54,11 @@ go run . artisan vendor:publish --package=github.com/goravel/gateway
 
 This method will publish the `config/gateway.go` file and the `proto` folder to your project.
 
-5. Add Grpc endpoints
+6. Add Grpc endpoints
 
 Rename the `proto/example/example.proto` file and add your Grpc endpoints. Notice, you should add `option (google.api.http)` to your endpoints like the example.
 
-6. Generate Grpc files
+7. Generate Grpc files
 
 Modify the `Makefile` file based on your proto files, then run command below:
 
@@ -76,7 +78,7 @@ protoc -I=./ \
     example/example.proto
 ```
 
-7. Configure Grpc Clients
+8. Configure Grpc Clients
 
 Modify the `config/grpc.go` file to add your Grpc clients. Notice, you should add `handlers` to your clients like the example.
 
@@ -93,7 +95,7 @@ Modify the `config/grpc.go` file to add your Grpc clients. Notice, you should ad
 },
 ```
 
-8. Add HTTP endpoints
+9. Add HTTP endpoints
 
 Add all HTTP route that define in the `proto/example/example.proto` file to the `routes/api.go` file, like the example below:
 
@@ -106,16 +108,16 @@ func Api() {
 }
 ```
 
-// Notice, you should use `gateway.Get` or `gateway.Post`, etc. to handle the HTTP request.
+> Notice, you should use `gateway.Get` or `gateway.Post`, etc. to handle the HTTP request.
 
-9. Add and fill environment variables to `.env` file
+10. Add and fill environment variables to `.env` file
 
 ```
 GATEWAY_HOST={gateway host}
 GATEWAY_PORT={gateway port}
 ```
 
-10. Run HTTP server and Gateway
+11. Run HTTP server and Gateway
 
 ```
 import (
