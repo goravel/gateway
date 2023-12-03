@@ -63,7 +63,7 @@ func (r *Gateway) Run() error {
 		}
 	}
 
-	addr := fmt.Sprintf("%s:%s", r.config.GetString("gateway.host"), r.config.GetString("gateway.port"))
+	addr := fmt.Sprintf("%s:%s", host, port)
 	server := &http.Server{
 		Addr:    addr,
 		Handler: serveMux,

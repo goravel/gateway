@@ -41,7 +41,12 @@ func request(ctx contractshttp.Context, method string) contractshttp.Response {
 		return fallback(ctx, err)
 	}
 
-	req.Header.Set("Content-Type", ctx.Request().Header("Content-Type"))
+	query := ctx.Request().Origin().URL.Query()
+	req.URL.RawQuery = query.Encode()
+	for key, header := range ctx.Request().Headers() {
+		req.Header.Set(key, ctx.Request().Header(header[0]))
+	}
+
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return fallback(ctx, err)

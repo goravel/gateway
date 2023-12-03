@@ -8,7 +8,7 @@
 [![Codecov](https://codecov.io/gh/goravel/gateway/branch/master/graph/badge.svg)](https://codecov.io/gh/goravel/gateway)
 ![License](https://img.shields.io/github/license/goravel/gateway)
 
-Gin http driver for Goravel.
+Microservices can only set grpc endpoints, and the gateway will transform the HTTP request to Grpc request.
 
 ## Version
 
@@ -56,7 +56,7 @@ This method will publish the `config/gateway.go` file and the `proto` folder to 
 
 6. Add Grpc endpoints
 
-Rename the `proto/example/example.proto` file and add your Grpc endpoints. Notice, you should add `option (google.api.http)` to your endpoints like the example.
+Rename the `proto/example/example.proto` file and add your Grpc endpoints. Notice, you should add `option (google.api.http)` to your endpoints like the example, you can get more examples in the `proto/google/api/http.proto` file.
 
 7. Generate Grpc files
 
