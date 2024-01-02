@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/gookit/color v1.5.4
-	github.com/goravel/framework v1.13.5
+	github.com/goravel/framework v1.13.7
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.18.1
 	github.com/stretchr/testify v1.8.4
 	google.golang.org/grpc v1.60.1
