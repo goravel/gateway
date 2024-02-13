@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	configmocks "github.com/goravel/framework/contracts/config/mocks"
-	grpcmocks "github.com/goravel/framework/contracts/grpc/mocks"
+	configmocks "github.com/goravel/framework/mocks/config"
+	grpcmocks "github.com/goravel/framework/mocks/grpc"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"

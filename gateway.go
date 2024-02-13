@@ -27,15 +27,19 @@ func NewGateway(config config.Config, grpc contractsgrpc.Grpc) *Gateway {
 	}
 }
 
-func (r *Gateway) Run() error {
+func (r *Gateway) Run(serveMux ...*runtime.ServeMux) error {
 	host := r.config.GetString("gateway.host")
 	port := r.config.GetString("gateway.port")
 	if host == "" || port == "" {
 		return errors.New("please initialize GATEWAY_HOST and GATEWAY_PORT")
 	}
 
+	mux := runtime.NewServeMux()
+	if len(serveMux) > 0 {
+		mux = serveMux[0]
+	}
+
 	connections := make(map[string]*grpc.ClientConn)
-	serveMux := runtime.NewServeMux()
 	clients := r.config.Get("grpc.clients").(map[string]any)
 	for name, params := range clients {
 		if name == "" {
@@ -57,7 +61,7 @@ func (r *Gateway) Run() error {
 		}
 
 		for _, handler := range handlers.([]Handler) {
-			if err := handler(context.Background(), serveMux, connections[name]); err != nil {
+			if err := handler(context.Background(), mux, connections[name]); err != nil {
 				return fmt.Errorf("register gRPC %s handler failed: %v", name, err)
 			}
 		}
@@ -66,7 +70,7 @@ func (r *Gateway) Run() error {
 	addr := fmt.Sprintf("%s:%s", host, port)
 	server := &http.Server{
 		Addr:    addr,
-		Handler: serveMux,
+		Handler: mux,
 	}
 
 	color.Greenln("[Gateway] Listening and serving Gateway on " + addr)

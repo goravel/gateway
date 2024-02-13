@@ -47,15 +47,22 @@ func request(ctx contractshttp.Context, method string) contractshttp.Response {
 		req.Header.Set(key, ctx.Request().Header(header[0]))
 	}
 
-	resp, err := http.DefaultClient.Do(req)
+	gatewayResp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return fallback(ctx, err)
 	}
-	defer resp.Body.Close()
-	content, err := io.ReadAll(resp.Body)
+	defer gatewayResp.Body.Close()
+	content, err := io.ReadAll(gatewayResp.Body)
 	if err != nil {
 		return fallback(ctx, err)
 	}
 
-	return ctx.Response().Data(200, "application/json", content)
+	resp := ctx.Response()
+	for key, value := range gatewayResp.Header {
+		if len(value) > 0 {
+			resp = resp.Header(key, value[0])
+		}
+	}
+
+	return resp.Data(200, ctx.Request().Header("Content-Type", "application/json"), content)
 }
