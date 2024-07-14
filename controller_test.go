@@ -280,9 +280,11 @@ func (r *UserController) GetUser(ctx context.Context, req *example.GetUserReques
 		}
 	}
 
-	grpc.SendHeader(ctx, metadata.New(map[string]string{
+	if err := grpc.SendHeader(ctx, metadata.New(map[string]string{
 		"custom-header": "goravel",
-	}))
+	})); err != nil {
+		return nil, err
+	}
 
 	return &example.GetUserResponse{
 		Status: &example.Status{
@@ -298,9 +300,11 @@ func (r *UserController) GetUser(ctx context.Context, req *example.GetUserReques
 }
 
 func (r *UserController) GetUsers(ctx context.Context, req *example.GetUsersRequest) (*example.GetUsersResponse, error) {
-	grpc.SendHeader(ctx, metadata.New(map[string]string{
+	if err := grpc.SendHeader(ctx, metadata.New(map[string]string{
 		"custom-header": "goravel",
-	}))
+	})); err != nil {
+		return nil, err
+	}
 
 	return &example.GetUsersResponse{
 		Status: &example.Status{
