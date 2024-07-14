@@ -9,7 +9,77 @@ option go_package="github.com/goravel/gateway/proto/example";
 // https://grpc-ecosystem.github.io/grpc-gateway/docs/tutorials/adding_annotations/
 import "google/api/annotations.proto";
 
+message Status {
+  int32 code = 1;
+  string error = 2;
+}
+
+message User {
+  int32 id = 1;
+  int32 user_id = 2;
+  string name = 3;
+  int32 age = 4;
+}
+
+message GetUsersRequest {
+  int32 user_id = 1;
+  string name = 2;
+  int32 age = 3;
+}
+
+message GetUsersResponse {
+  Status status = 1;
+  User user = 2;
+}
+
+message GetUserRequest {
+  int32 id = 1;
+  int32 user_id = 2;
+}
+
+message GetUserResponse {
+  Status status = 1;
+  User user = 2;
+}
+
+message CreateUserRequest {
+  int32 user_id = 1;
+  string name = 2;
+  int32 age = 3;
+}
+
+message CreateUserResponse {
+  Status status = 1;
+  User user = 2;
+}
+
+message UpdateUserRequest {
+  int32 id = 1;
+  int32 user_id = 2;
+  string name = 3;
+  int32 age = 4;
+}
+
+message UpdateUserResponse {
+  Status status = 1;
+  User user = 2;
+}
+
+message DeleteUserRequest {
+  int32 id = 1;
+  int32 user_id = 2;
+}
+
+message DeleteUserResponse {
+  Status status = 1;
+}
+
 service UserService {
+  rpc GetUsers (GetUsersRequest) returns (GetUsersResponse) {
+    option (google.api.http) = {
+      get: "/users"
+    };
+  }
   rpc GetUser (GetUserRequest) returns (GetUserResponse) {
     option (google.api.http) = {
       get: "/users/{id}"
@@ -21,32 +91,15 @@ service UserService {
       body: "*"
     };
   }
-}
-
-message Status {
-  int32 code = 1;
-  string error = 2;
-}
-
-message User {
-  int64 id = 1;
-  string name = 2;
-}
-
-message GetUserRequest {
-  int64 id = 1;
-}
-
-message GetUserResponse {
-  Status status = 1;
-  User user = 2;
-}
-
-message CreateUserRequest {
-  string name = 2;
-}
-
-message CreateUserResponse {
-  Status status = 1;
-  User user = 2;
+  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {
+    option (google.api.http) = {
+      put: "/users/{id}"
+      body: "*"
+    };
+  }
+  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse) {
+    option (google.api.http) = {
+      delete: "/users/{id}"
+    };
+  }
 }

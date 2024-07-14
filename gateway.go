@@ -9,6 +9,7 @@ import (
 	"github.com/gookit/color"
 	"github.com/goravel/framework/contracts/config"
 	contractsgrpc "github.com/goravel/framework/contracts/grpc"
+	contractshttp "github.com/goravel/framework/contracts/http"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
 )
@@ -79,4 +80,12 @@ func (r *Gateway) Run(serveMux ...*runtime.ServeMux) error {
 	}
 
 	return nil
+}
+
+func Inject[V NumberOrString](ctx contractshttp.Context, key string, value V) {
+	if injectValue, exist := ctx.Value(InjectKey).(map[string]any); exist {
+		injectValue[key] = value
+	} else {
+		ctx.WithValue(InjectKey, map[string]any{key: value})
+	}
 }

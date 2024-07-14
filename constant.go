@@ -8,6 +8,12 @@ import (
 	"google.golang.org/grpc"
 )
 
+const InjectKey = "gateway-inject"
+
+type NumberOrString interface {
+	~int | ~int8 | ~int16 | ~int32 | ~int64 | ~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~float32 | ~float64 | ~string
+}
+
 type Api struct {
 	Method     string
 	Url        string

@@ -138,6 +138,8 @@ go func() {
 }()
 ```
 
+12. TODO: Add description for the Inject function
+
 ## Testing
 
 Run command below to run test:
