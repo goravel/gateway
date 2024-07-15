@@ -63,19 +63,7 @@ Rename the `proto/example/example.proto` file and add your Grpc endpoints. Notic
 Modify the `Makefile` file based on your proto files, then run command below:
 
 ```
-make {your proto name}
-```
-
-Or your can run command below directly:
-
-```
-cd proto
-
-protoc -I=./ \
-    --go_out=./ --go_opt=paths=source_relative \
-    --go-grpc_out=./ --go-grpc_opt=paths=source_relative \
-    --grpc-gateway_out=./ --grpc-gateway_opt=paths=source_relative \
-    example/example.proto
+make -B {your proto name}
 ```
 
 8. Configure Grpc Clients
@@ -137,6 +125,46 @@ go func() {
     }
 }()
 ```
+
+## Inject variables to the Grpc request
+
+Imagine, you have two endpoints: 
+
+1. `POST /login`: login in your system and return a JWT token.
+2. `POST /users`: create a user, needs a JWT token to authorize, the request of the corresponding Grpc endpoint is:
+
+```
+message CreateUserRequest {
+  int32 user_id = 1;
+  string name = 2;
+  int32 age = 3;
+}
+
+message CreateUserResponse {
+  Status status = 1;
+  User user = 2;
+}
+
+rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {
+  option (google.api.http) = {
+    post: "/users"
+    body: "*"
+  };
+}
+```
+
+The `user_id` in the request is parsed by the JWT token, it's terrible if parse it in every Grpc endpoint, In addition, 
+if the `CreateUser` Grpc endpoint can be called by other microservices directly, other microservices should pass the 
+`user_id` instead of a JWT token, so we should add an HTTP middleware to parse the JWT token and inject the `user_id` to 
+the Grpc request.
+
+```
+import "github.com/goravel/gateway"
+
+gateway.Inject(ctx, "user_id", user.GetId())
+```
+
+An example: https://github.com/goravel-ecosystem/market-backend/blob/master/src/go/gateway/app/http/middleware/jwt.go
 
 ## Testing
 

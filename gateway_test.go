@@ -36,7 +36,7 @@ func TestRun(t *testing.T) {
 			name: "Happy path",
 			setup: func() {
 				mockConfig.On("GetString", "gateway.host").Return("127.0.0.1")
-				mockConfig.On("GetString", "gateway.port").Return("3002")
+				mockConfig.On("GetString", "gateway.port").Return("4001")
 				mockConfig.On("Get", "grpc.clients").Return(map[string]any{
 					"goravel": map[string]any{
 						"handlers": []Handler{
@@ -53,7 +53,7 @@ func TestRun(t *testing.T) {
 			name: "Happy path when gateway.grpc is empty",
 			setup: func() {
 				mockConfig.On("GetString", "gateway.host").Return("127.0.0.1")
-				mockConfig.On("GetString", "gateway.port").Return("3003")
+				mockConfig.On("GetString", "gateway.port").Return("4002")
 				mockConfig.On("Get", "grpc.clients").Return(map[string]any{})
 			},
 		},
@@ -61,7 +61,7 @@ func TestRun(t *testing.T) {
 			name: "error, gateway.host is empty",
 			setup: func() {
 				mockConfig.On("GetString", "gateway.host").Return("")
-				mockConfig.On("GetString", "gateway.port").Return("3002")
+				mockConfig.On("GetString", "gateway.port").Return("4001")
 			},
 			expectErr: errors.New("please initialize GATEWAY_HOST and GATEWAY_PORT"),
 		},
@@ -77,7 +77,7 @@ func TestRun(t *testing.T) {
 			name: "error, grpc handler is nil",
 			setup: func() {
 				mockConfig.On("GetString", "gateway.host").Return("127.0.0.1")
-				mockConfig.On("GetString", "gateway.port").Return("3002")
+				mockConfig.On("GetString", "gateway.port").Return("4001")
 				mockConfig.On("Get", "grpc.clients").Return(map[string]any{
 					"goravel": map[string]any{},
 				})
@@ -89,7 +89,7 @@ func TestRun(t *testing.T) {
 			name: "error, grpc handler returns error",
 			setup: func() {
 				mockConfig.On("GetString", "gateway.host").Return("127.0.0.1")
-				mockConfig.On("GetString", "gateway.port").Return("3002")
+				mockConfig.On("GetString", "gateway.port").Return("4001")
 				mockConfig.On("Get", "grpc.clients").Return(map[string]any{
 					"goravel": map[string]any{
 						"handlers": []Handler{
