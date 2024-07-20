@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/gookit/color v1.5.4
-	github.com/goravel/framework v1.14.3
+	github.com/goravel/framework v1.14.4
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.20.0
 	github.com/spf13/cast v1.6.0
 	github.com/stretchr/testify v1.9.0
