@@ -6,7 +6,7 @@ require (
 	github.com/gookit/color v1.5.4
 	github.com/goravel/framework v1.14.4
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.21.0
-	github.com/spf13/cast v1.6.0
+	github.com/spf13/cast v1.7.0
 	github.com/stretchr/testify v1.9.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20240805194559-2c9e96a0b5d4
 	google.golang.org/grpc v1.65.0
