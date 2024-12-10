@@ -6,7 +6,7 @@ toolchain go1.23.4
 
 require (
 	github.com/gookit/color v1.5.4
-	github.com/goravel/framework v1.14.4
+	github.com/goravel/framework v1.14.8
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.24.0
 	github.com/spf13/cast v1.7.0
 	github.com/stretchr/testify v1.10.0
