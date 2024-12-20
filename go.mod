@@ -6,7 +6,7 @@ toolchain go1.23.4
 
 require (
 	github.com/gookit/color v1.5.4
-	github.com/goravel/framework v1.14.4
+	github.com/goravel/framework v1.14.9
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.25.1
 	github.com/spf13/cast v1.7.1
 	github.com/stretchr/testify v1.10.0
@@ -62,6 +62,7 @@ require (
 	github.com/go-redsync/redsync/v4 v4.8.1 // indirect
 	github.com/go-sql-driver/mysql v1.8.1 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
+	github.com/go-viper/mapstructure/v2 v2.2.1 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/golang-jwt/jwt/v5 v5.2.1 // indirect
 	github.com/golang-migrate/migrate/v4 v4.17.1 // indirect
