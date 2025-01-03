@@ -362,6 +362,10 @@ type DataResponse struct {
 	writer      http.ResponseWriter
 }
 
+func (r *DataResponse) Abort() error {
+	return nil
+}
+
 func (r *DataResponse) Render() error {
 	r.writer.WriteHeader(r.code)
 	r.writer.Header().Set("Content-Type", r.contentType)
@@ -409,7 +413,11 @@ func (r *TestContext) Context() context.Context {
 	return r.ctx
 }
 
-func (r *TestContext) WithValue(key string, value any) {
+func (r *TestContext) WithContext(ctx context.Context) {
+	r.ctx = ctx
+}
+
+func (r *TestContext) WithValue(key any, value any) {
 	//nolint:all
 	r.ctx = context.WithValue(r.ctx, key, value)
 }
@@ -430,6 +438,10 @@ func NewTestRequest(ctx *TestContext) *TestRequest {
 	return &TestRequest{
 		ctx: ctx,
 	}
+}
+
+func (r *TestRequest) Abort(code ...int) {
+	panic("do not need to implement it")
 }
 
 func (r *TestRequest) Header(key string, def ...string) string {
@@ -618,7 +630,7 @@ func (r *TestResponse) Cookie(cookie contractshttp.Cookie) contractshttp.Context
 	return r
 }
 
-func (r *TestResponse) Data(code int, contentType string, data []byte) contractshttp.Response {
+func (r *TestResponse) Data(code int, contentType string, data []byte) contractshttp.AbortableResponse {
 	return &DataResponse{code, contentType, data, r.ctx.writer}
 }
 
@@ -636,11 +648,11 @@ func (r *TestResponse) Header(key, value string) contractshttp.ContextResponse {
 	return r
 }
 
-func (r *TestResponse) Json(int, any) contractshttp.Response {
+func (r *TestResponse) Json(int, any) contractshttp.AbortableResponse {
 	panic("do not need to implement it")
 }
 
-func (r *TestResponse) NoContent(...int) contractshttp.Response {
+func (r *TestResponse) NoContent(...int) contractshttp.AbortableResponse {
 	panic("do not need to implement it")
 }
 
@@ -648,11 +660,11 @@ func (r *TestResponse) Origin() contractshttp.ResponseOrigin {
 	panic("do not need to implement it")
 }
 
-func (r *TestResponse) Redirect(int, string) contractshttp.Response {
+func (r *TestResponse) Redirect(int, string) contractshttp.AbortableResponse {
 	panic("do not need to implement it")
 }
 
-func (r *TestResponse) String(int, string, ...any) contractshttp.Response {
+func (r *TestResponse) String(int, string, ...any) contractshttp.AbortableResponse {
 	panic("do not need to implement it")
 }
 
@@ -661,6 +673,10 @@ func (r *TestResponse) Success() contractshttp.ResponseStatus {
 }
 
 func (r *TestResponse) Status(int) contractshttp.ResponseStatus {
+	panic("do not need to implement it")
+}
+
+func (r *TestResponse) Stream(int, func(contractshttp.StreamWriter) error) contractshttp.Response {
 	panic("do not need to implement it")
 }
 
