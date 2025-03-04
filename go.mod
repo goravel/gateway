@@ -7,7 +7,7 @@ toolchain go1.24.0
 require (
 	github.com/gookit/color v1.5.4
 	github.com/goravel/framework v1.15.4
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.2
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3
 	github.com/spf13/cast v1.7.1
 	github.com/stretchr/testify v1.10.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20250303144028-a0af3efb3deb
