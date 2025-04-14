@@ -6,7 +6,7 @@ toolchain go1.24.2
 
 require (
 	github.com/gookit/color v1.5.4
-	github.com/goravel/framework v1.15.5
+	github.com/goravel/framework v1.15.7
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3
 	github.com/spf13/cast v1.7.1
 	github.com/stretchr/testify v1.10.0
@@ -21,7 +21,7 @@ require (
 	atomicgo.dev/schedule v0.1.0 // indirect
 	github.com/containerd/console v1.0.4 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
-	github.com/dromara/carbon/v2 v2.5.2 // indirect
+	github.com/dromara/carbon/v2 v2.5.6 // indirect
 	github.com/fsnotify/fsnotify v1.8.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.8 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
