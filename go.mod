@@ -8,7 +8,7 @@ require (
 	github.com/gookit/color v1.5.4
 	github.com/goravel/framework v1.15.7
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3
-	github.com/spf13/cast v1.7.1
+	github.com/spf13/cast v1.8.0
 	github.com/stretchr/testify v1.10.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20250404141209-ee84b53bf3d0
 	google.golang.org/grpc v1.72.0
