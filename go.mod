@@ -2,7 +2,7 @@ module github.com/goravel/gateway
 
 go 1.24
 
-toolchain go1.24.3
+toolchain go1.24.4
 
 require (
 	github.com/gookit/color v1.5.4
