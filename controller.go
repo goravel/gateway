@@ -85,7 +85,9 @@ func request(ctx contractshttp.Context, method string) contractshttp.Response {
 	if err != nil {
 		return fallback(ctx, err)
 	}
-	defer gatewayResp.Body.Close()
+	defer func() {
+		_ = gatewayResp.Body.Close()
+	}()
 	data, err := io.ReadAll(gatewayResp.Body)
 	if err != nil {
 		return fallback(ctx, err)
