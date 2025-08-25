@@ -165,7 +165,9 @@ func (s *ControllerTestSuite) TestGet() {
 
 			resp, err := http.DefaultClient.Do(req)
 			s.Require().NoError(err)
-			defer resp.Body.Close()
+			defer func() {
+				_ = resp.Body.Close()
+			}()
 
 			s.Equal("goravel", resp.Header.Get("Grpc-Metadata-Custom-Header"))
 
@@ -194,7 +196,9 @@ func (s *ControllerTestSuite) TestPost() {
 
 	resp, err := http.DefaultClient.Do(req)
 	s.Require().NoError(err)
-	defer resp.Body.Close()
+	defer func() {
+		_ = resp.Body.Close()
+	}()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -218,7 +222,9 @@ func (s *ControllerTestSuite) TestPut() {
 
 	resp, err := http.DefaultClient.Do(req)
 	s.Require().NoError(err)
-	defer resp.Body.Close()
+	defer func() {
+		_ = resp.Body.Close()
+	}()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -240,7 +246,9 @@ func (s *ControllerTestSuite) TestDelete() {
 
 	resp, err := http.DefaultClient.Do(req)
 	s.Require().NoError(err)
-	defer resp.Body.Close()
+	defer func() {
+		_ = resp.Body.Close()
+	}()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
