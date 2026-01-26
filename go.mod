@@ -7,10 +7,10 @@ toolchain go1.25.6
 require (
 	github.com/gookit/color v1.6.0
 	github.com/goravel/framework v1.15.9
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.4
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.5
 	github.com/spf13/cast v1.10.0
 	github.com/stretchr/testify v1.11.1
-	google.golang.org/genproto/googleapis/api v0.0.0-20260114163908-3f89685c29c3
+	google.golang.org/genproto/googleapis/api v0.0.0-20260120221211-b8f7ae30c516
 	google.golang.org/grpc v1.78.0
 	google.golang.org/protobuf v1.36.11
 )
@@ -50,8 +50,8 @@ require (
 	golang.org/x/net v0.47.0 // indirect
 	golang.org/x/sys v0.38.0 // indirect
 	golang.org/x/term v0.37.0 // indirect
-	golang.org/x/text v0.32.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20251222181119-0a764e51fe1b // indirect
+	golang.org/x/text v0.33.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260120221211-b8f7ae30c516 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
