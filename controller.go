@@ -51,7 +51,7 @@ func request(ctx contractshttp.Context, method string) contractshttp.Response {
 			return fallback(ctx, err)
 		}
 
-		jsonDriver := json.NewJson()
+		jsonDriver := json.New()
 		var dataJson map[string]any
 		if err := jsonDriver.Unmarshal(data, &dataJson); err != nil {
 			return fallback(ctx, err)

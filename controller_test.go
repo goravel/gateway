@@ -509,6 +509,14 @@ func (r *TestRequest) BindQuery(any) error {
 	panic("do not need to implement it")
 }
 
+func (r *TestRequest) Name() string {
+	panic("do not need to implement it")
+}
+
+func (r *TestRequest) OriginPath() string {
+	panic("do not need to implement it")
+}
+
 func (r *TestRequest) Route(string) string {
 	panic("do not need to implement it")
 }
@@ -574,6 +582,10 @@ func (r *TestRequest) SetSession(session contractsession.Session) contractshttp.
 	return r
 }
 
+func (r *TestRequest) Info() contractshttp.Info {
+	panic("do not need to implement it")
+}
+
 func (r *TestRequest) Input(string, ...string) string {
 	panic("do not need to implement it")
 }
@@ -582,7 +594,11 @@ func (r *TestRequest) InputArray(string, ...[]string) []string {
 	panic("do not need to implement it")
 }
 
-func (r *TestRequest) InputMap(string, ...map[string]string) map[string]string {
+func (r *TestRequest) InputMap(string, ...map[string]any) map[string]any {
+	panic("do not need to implement it")
+}
+
+func (r *TestRequest) InputMapArray(string, ...[]map[string]any) []map[string]any {
 	panic("do not need to implement it")
 }
 
@@ -599,6 +615,10 @@ func (r *TestRequest) InputBool(string, ...bool) bool {
 }
 
 func (r *TestRequest) File(string) (filesystem.File, error) {
+	panic("do not need to implement it")
+}
+
+func (r *TestRequest) Files(name string) ([]filesystem.File, error) {
 	panic("do not need to implement it")
 }
 
