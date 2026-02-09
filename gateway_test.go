@@ -37,7 +37,7 @@ func TestRun(t *testing.T) {
 			setup: func() {
 				mockConfig.On("GetString", "gateway.host").Return("127.0.0.1")
 				mockConfig.On("GetString", "gateway.port").Return("4001")
-				mockConfig.On("Get", "grpc.clients").Return(map[string]any{
+				mockConfig.On("Get", "grpc.servers").Return(map[string]any{
 					"goravel": map[string]any{
 						"handlers": []Handler{
 							func(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
@@ -54,7 +54,7 @@ func TestRun(t *testing.T) {
 			setup: func() {
 				mockConfig.On("GetString", "gateway.host").Return("127.0.0.1")
 				mockConfig.On("GetString", "gateway.port").Return("4002")
-				mockConfig.On("Get", "grpc.clients").Return(map[string]any{})
+				mockConfig.On("Get", "grpc.servers").Return(map[string]any{})
 			},
 		},
 		{
@@ -78,7 +78,7 @@ func TestRun(t *testing.T) {
 			setup: func() {
 				mockConfig.On("GetString", "gateway.host").Return("127.0.0.1")
 				mockConfig.On("GetString", "gateway.port").Return("4001")
-				mockConfig.On("Get", "grpc.clients").Return(map[string]any{
+				mockConfig.On("Get", "grpc.servers").Return(map[string]any{
 					"goravel": map[string]any{},
 				})
 				mockGrpc.On("Client", context.Background(), "goravel").Return(&grpc.ClientConn{}, nil)
@@ -90,7 +90,7 @@ func TestRun(t *testing.T) {
 			setup: func() {
 				mockConfig.On("GetString", "gateway.host").Return("127.0.0.1")
 				mockConfig.On("GetString", "gateway.port").Return("4001")
-				mockConfig.On("Get", "grpc.clients").Return(map[string]any{
+				mockConfig.On("Get", "grpc.servers").Return(map[string]any{
 					"goravel": map[string]any{
 						"handlers": []Handler{
 							func(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {

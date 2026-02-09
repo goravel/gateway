@@ -41,7 +41,7 @@ func (r *Gateway) Run(serveMux ...*runtime.ServeMux) error {
 	}
 
 	connections := make(map[string]*grpc.ClientConn)
-	clients := r.config.Get("grpc.clients").(map[string]any)
+	clients := r.config.Get("grpc.servers").(map[string]any)
 	for name, params := range clients {
 		if name == "" {
 			return errors.New("gRPC client name is required")
