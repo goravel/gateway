@@ -637,7 +637,7 @@ func (r *TestRequest) Origin() *http.Request {
 	return r.ctx.request
 }
 
-func (r *TestRequest) Validate(map[string]string, ...validation.Option) (validation.Validator, error) {
+func (r *TestRequest) Validate(map[string]any, ...validation.Option) (validation.Validator, error) {
 	panic("do not need to implement it")
 }
 
