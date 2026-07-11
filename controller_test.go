@@ -58,10 +58,10 @@ func (s *ControllerTestSuite) SetupSuite() {
 			"interceptors": []string{},
 		},
 	}).Once()
-	mockConfig.EXPECT().GetString("grpc.servers.example.host").Return(exampleHost).Once()
-	mockConfig.EXPECT().GetString("grpc.servers.example.port").Return(examplePort).Once()
-	mockConfig.EXPECT().Get("grpc.servers.example.interceptors").Return([]string{}).Once()
-	mockConfig.EXPECT().Get("grpc.servers.example.stats_handlers").Return([]string{}).Once()
+	mockConfig.EXPECT().GetString("grpc.clients.example.host").Return(exampleHost).Once()
+	mockConfig.EXPECT().GetString("grpc.clients.example.port").Return(examplePort).Once()
+	mockConfig.EXPECT().Get("grpc.clients.example.interceptors").Return([]string{}).Once()
+	mockConfig.EXPECT().Get("grpc.clients.example.stats_handlers").Return([]string{}).Once()
 
 	s.grpc = frameworkgrpc.NewApplication(mockConfig)
 	s.grpc.UnaryServerInterceptors([]grpc.UnaryServerInterceptor{})
@@ -637,7 +637,7 @@ func (r *TestRequest) Origin() *http.Request {
 	return r.ctx.request
 }
 
-func (r *TestRequest) Validate(map[string]string, ...validation.Option) (validation.Validator, error) {
+func (r *TestRequest) Validate(map[string]any, ...validation.Option) (validation.Validator, error) {
 	panic("do not need to implement it")
 }
 
