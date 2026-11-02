@@ -41,6 +41,9 @@ func (r *Gateway) Run(serveMux ...*runtime.ServeMux) error {
 	mux := runtime.NewServeMux(runtime.WithLegacyHeaderMatching())
 	if len(serveMux) > 0 {
 		mux = serveMux[0]
+		// A caller-supplied mux was built elsewhere; apply the header matcher here too so
+		// Grpc-Metadata-* forwarding does not depend on how the mux was constructed.
+		runtime.WithLegacyHeaderMatching()(mux)
 	}
 
 	connections := make(map[string]*grpc.ClientConn)

@@ -78,7 +78,6 @@ func (s *ControllerTestSuite) SetupSuite() {
 
 	go func() {
 		mux := runtime.NewServeMux(
-			runtime.WithLegacyHeaderMatching(),
 			runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{
 				MarshalOptions: protojson.MarshalOptions{
 					UseProtoNames: true,
