@@ -35,9 +35,15 @@ func (r *Gateway) Run(serveMux ...*runtime.ServeMux) error {
 		return errors.New("please initialize GATEWAY_HOST and GATEWAY_PORT")
 	}
 
-	mux := runtime.NewServeMux()
+	// grpc-gateway v2.33.0 stopped forwarding Grpc-Metadata-* headers by default.
+	// This package forwards every incoming HTTP header to the local grpc-gateway hop,
+	// so restore the previous behaviour to keep HTTP header -> gRPC metadata working.
+	mux := runtime.NewServeMux(runtime.WithLegacyHeaderMatching())
 	if len(serveMux) > 0 {
 		mux = serveMux[0]
+		// A caller-supplied mux was built elsewhere; apply the header matcher here too so
+		// Grpc-Metadata-* forwarding does not depend on how the mux was constructed.
+		runtime.WithLegacyHeaderMatching()(mux)
 	}
 
 	connections := make(map[string]*grpc.ClientConn)
